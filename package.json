@@ -9,11 +9,6 @@
     "build": "webpack --mode=production",
     "dev": "npm-run-all --silent --parallel start client"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx}": [
       "eslint --fix",
