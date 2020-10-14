@@ -1,0 +1,51 @@
+body {
+  background-color: rgb(245, 245, 245);
+}
+
+h5 {
+  color: rgb(180, 180, 180);
+}
+
+.btn-primary {
+  background-color: rgb(108, 170, 243);
+  border-color: rgb(108, 170, 243);
+}
+
+.btn-outline-secondary {
+  border-color: rgb(108, 170, 243);
+  color: rgb(0, 0, 0);
+}
+
+.addModalOverlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(248, 248, 248, 0.85);
+  z-index: 5000;
+}
+
+.addModalContent {
+  border: 1px solid black;
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.fa-check-circle, .fa-times {
+  cursor: pointer;
+}
+
+.fa-times {
+  color: red;
+}
+
+.green {
+  color: green;
+}
