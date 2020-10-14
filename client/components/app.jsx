@@ -9,21 +9,32 @@ class App extends React.Component {
     super(props);
     this.state = {
       view: 'list',
-      todos: []
+      todos: [],
+      singleTodo:
+      {
+        task: '',
+        date: '',
+        isCompleted: false,
+        id: ''
+      }
     };
-    this.setView = this.setView.bind(this);
+    this.removeClassNoneOne = this.removeClassNoneOne.bind(this);
     this.getAllTodos = this.getAllTodos.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.completeTodo = this.completeTodo.bind(this);
-  }
-
-  setView(name) {
-    this.setState({ view: name });
+    this.getSingleTodo = this.getSingleTodo.bind(this);
+    this.resetSingleTodo = this.resetSingleTodo.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
   }
 
   componentDidMount() {
     this.getAllTodos();
+  }
+
+  removeClassNoneOne() {
+    const element = document.getElementById('modalOverlayOne');
+    element.classList.remove('d-none');
   }
 
   getAllTodos() {
@@ -102,21 +113,84 @@ class App extends React.Component {
       .then(() => this.setState({ todos: updatedTodos }));
   }
 
+  getSingleTodo(id) {
+    for (let i = 0; i < this.state.todos.length; i++) {
+      if (this.state.todos[i].id === id) {
+        this.setState({
+          singleTodo: {
+            task: this.state.todos[i].task,
+            date: this.state.todos[i].date,
+            isCompleted: this.state.todos[i].isCompleted,
+            id: id
+          }
+        });
+      }
+    }
+    this.removeClassNoneOne();
+  }
+
+  resetSingleTodo() {
+    this.setState({
+      singleTodo:
+      {
+        task: '',
+        date: '',
+        isCompleted: '',
+        id: ''
+      }
+    });
+  }
+
+  updateTodo(newTodo) {
+    const updatedTodos = [];
+    const newArray = this.state.todos.slice(0, this.state.todos.length);
+    fetch(`/api/todos/${this.state.singleTodo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newTodo)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        for (let i = 0; i < newArray.length; i++) {
+          let todo = { ...newArray[i] };
+          if (data.id === newArray[i].id) {
+            todo = data;
+          }
+          updatedTodos.push(todo);
+        }
+      })
+      .then(() => this.setState({
+        todos: updatedTodos,
+        singleTodo:
+        {
+          task: '',
+          date: '',
+          isCompleted: '',
+          id: ''
+        }
+      }));
+  }
+
   render() {
     if (this.state.view === 'list') {
       return (
         <div className='container'>
           <Header />
-          <AddButton setView={this.setView} />
-          <TodoList todos={this.state.todos} onDelete={this.deleteTodo} onComplete={this.completeTodo} />
+          <AddButton removeClassNone={this.removeClassNoneOne} />
+          <AddForm onSubmit={this.addTodo} singleTodo={this.state.singleTodo} resetSingleTodo={this.resetSingleTodo} updateTodo={this.updateTodo} />
+          <TodoList todos={this.state.todos} onDelete={this.deleteTodo} onComplete={this.completeTodo} onUpdate={this.getSingleTodo} />
         </div>
       );
     } else if (this.state.view === 'addForm') {
       return (
         <div className='container'>
           <Header />
-          <AddButton setView={this.setView} />
-          <AddForm setView={this.setView} onSubmit={this.addTodo} />
+          <AddButton />
+          <AddForm onSubmit={this.addTodo} singleTodo={this.state.singleTodo} resetSingleTodo={this.resetSingleTodo} updateTodo={this.updateTodo} />
           <TodoList todos={this.state.todos} onDelete={this.deleteTodo} onComplete={this.completeTodo} />
         </div>
       );
