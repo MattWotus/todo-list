@@ -37,6 +37,10 @@ class AddForm extends React.Component {
     const inputWidth = {
       maxWidth: '95%'
     };
+    const buttonColor = {
+      backgroundColor: 'rgba(108, 170, 243, 0.0)',
+      color: 'rgb(108, 170, 243)'
+    };
     return (
       <div className='addModalOverlay'>
         <div className='addModalContent'>
@@ -65,7 +69,7 @@ class AddForm extends React.Component {
             <div className='row'>
               <div className='col-12 d-flex justify-content-center mb-3'>
                 <button type="submit" className="btn btn-primary pl-3 pr-3 mr-2">Add</button>
-                <button type="reset" className="btn btn-outline-secondary pl-3 pr-3">Cancel</button>
+                <button type="reset" className="btn btn-primary pl-3 pr-3" style={buttonColor}>Cancel</button>
               </div>
             </div>
           </form>

@@ -42,24 +42,30 @@ function Todo(props) {
 }
 
 function TodoList(props) {
-  return (
-    <ul className='list-group'>
-      {
-        props.todos.map(todo => {
-          return (
-            <Todo
-              key={todo.id}
-              id={todo.id}
-              todo={todo.task}
-              date={todo.date}
-              isCompleted={todo.isCompleted}
-              deleteTodo={props.onDelete}
-              completeTodo={props.onComplete} />
-          );
-        })
-      }
-    </ul>
-  );
+  if (props.todos.length === 0) {
+    return (
+      <h3>No Tasks</h3>
+    );
+  } else {
+    return (
+      <ul className='list-group'>
+        {
+          props.todos.map(todo => {
+            return (
+              <Todo
+                key={todo.id}
+                id={todo.id}
+                todo={todo.task}
+                date={todo.date}
+                isCompleted={todo.isCompleted}
+                deleteTodo={props.onDelete}
+                completeTodo={props.onComplete} />
+            );
+          })
+        }
+      </ul>
+    );
+  }
 }
 
 export default TodoList;
