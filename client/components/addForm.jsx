@@ -106,7 +106,7 @@ class AddForm extends React.Component {
             <form onSubmit={this.handleUpdate} onReset={this.handleReset}>
               <div className='row'>
                 <div className='col-12'>
-                  <label htmlFor='todo' className='mt-3 mb-2'>Add a New Task</label>
+                  <label htmlFor='todo' className='mt-3 mb-2'>Update Task</label>
                 </div>
               </div>
               <div className='row'>
