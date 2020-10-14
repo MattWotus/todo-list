@@ -27,14 +27,13 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    contentBase: publicPath,
-    historyApiFallback: true,
     host: '0.0.0.0',
-    port: process.env.DEV_SERVER_PORT,
-    proxy: {
-      '/api': `http://localhost:${process.env.PORT}`
-    },
+    port: 3000,
+    contentBase: publicPath,
+    watchContentBase: true,
     stats: 'minimal',
-    watchContentBase: true
+    proxy: {
+      '/api': 'http://localhost:3001'
+    }
   }
 };
