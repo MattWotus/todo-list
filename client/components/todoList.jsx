@@ -3,7 +3,7 @@ import React from 'react';
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function Todo(props) {
-  const todo = props.todo;
+  const task = props.task;
   const date = props.date;
   const newDate = new Date(date);
   const year = newDate.getUTCFullYear();
@@ -15,11 +15,12 @@ function Todo(props) {
       <li className="list-group-item d-flex justify-content-between mb-2">
         <div className='d-flex align-items-center'>
           <i onClick={() => props.completeTodo(props.id)} className="far fa-check-circle fa-2x mr-3"></i>
-          {todo}
+          {task}
         </div>
         <div className='d-flex align-items-center'>
           {formattedDate}
           <i className="fas fa-sort fa-2x ml-3"></i>
+          <i onClick={() => props.updateTodo(props.id)} className="far fa-edit fa-2x ml-3"></i>
           <i onClick={() => props.deleteTodo(props.id)} className="fas fa-times fa-2x ml-3"></i>
         </div>
       </li>
@@ -29,11 +30,12 @@ function Todo(props) {
       <li className="list-group-item d-flex justify-content-between mb-2 green">
         <div className='d-flex align-items-center'>
           <i onClick={() => props.completeTodo(props.id)} className="far fa-check-circle fullOpacity fa-2x mr-3"></i>
-          {todo}
+          {task}
         </div>
         <div className='d-flex align-items-center'>
           {formattedDate}
           <i className="fas fa-sort fa-2x ml-3"></i>
+          <i onClick={() => props.updateTodo(props.id)} className="far fa-edit fa-2x ml-3"></i>
           <i onClick={() => props.deleteTodo(props.id)} className="fas fa-times fa-2x ml-3"></i>
         </div>
       </li>
@@ -55,11 +57,12 @@ function TodoList(props) {
               <Todo
                 key={todo.id}
                 id={todo.id}
-                todo={todo.task}
+                task={todo.task}
                 date={todo.date}
                 isCompleted={todo.isCompleted}
                 deleteTodo={props.onDelete}
-                completeTodo={props.onComplete} />
+                completeTodo={props.onComplete}
+                updateTodo={props.onUpdate} />
             );
           })
         }
