@@ -26,9 +26,9 @@ function Todo(props) {
     );
   } else {
     return (
-      <li className="list-group-item d-flex justify-content-between mb-2">
+      <li className="list-group-item d-flex justify-content-between mb-2 green">
         <div className='d-flex align-items-center'>
-          <i onClick={() => props.completeTodo(props.id)} className="far fa-check-circle green fa-2x mr-3"></i>
+          <i onClick={() => props.completeTodo(props.id)} className="far fa-check-circle fullOpacity fa-2x mr-3"></i>
           {todo}
         </div>
         <div className='d-flex align-items-center'>
