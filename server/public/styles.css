@@ -42,10 +42,19 @@ h5 {
   cursor: pointer;
 }
 
+.fa-check-circle {
+  opacity: 50%;
+}
+
 .fa-times {
-  color: red;
+  color: rgba(255, 0, 0, 0.7);
 }
 
 .green {
-  color: green;
+  background-color: rgba(0, 128, 0, 0.7);
+  color: white;
+}
+
+.fullOpacity {
+  opacity: 100%;
 }
