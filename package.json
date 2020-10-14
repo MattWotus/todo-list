@@ -4,10 +4,11 @@
   "description": "A React To-Do List.",
   "main": "server/index.js",
   "scripts": {
-    "client": "webpack-dev-server",
-    "start": "node server/index.js",
+    "dev": "npm-run-all --silent --parallel start client",
+    "dev:client": "webpack-dev-server",
+    "dev:server": "nodemon server/index.js",
     "build": "webpack --mode=production",
-    "dev": "npm-run-all --silent --parallel start client"
+    "start": "NODE_ENV=production node server/index.js"
   },
   "husky": {
     "hooks": {
@@ -46,15 +47,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Learning-Fuze/sgt-react.git"
+    "url": "git+https://github.com/MattWotus/todo-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Learning-Fuze/sgt-react/issues"
+    "url": "https://github.com/Learning-Fuze/todo-list/issues"
   },
-  "homepage": "https://github.com/Learning-Fuze/sgt-react#readme",
+  "homepage": "https://github.com/Learning-Fuze/todo-list#readme",
   "eslintIgnore": [
     "server/public/main.js"
   ],
